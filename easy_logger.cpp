@@ -1,3 +1,10 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <fstream>
+#include <ctime>
+
 #include "easy_logger.h"
 
 EasyLogger::EasyLogger(string log_dir){
@@ -11,7 +18,7 @@ void EasyLogger::log(string msg){
     myfile.close();
 }
 
-string get_curr_time(){
+string EasyLogger::get_curr_time(){
     time_t t = std::time(0);
     tm* now = std::localtime(&t);
     return to_string(now->tm_year + 1900) + "-" + to_string(now->tm_mon + 1) + "-" +
