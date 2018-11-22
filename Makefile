@@ -1,6 +1,6 @@
 CC = g++
 
-CFLAGS = 
+CFLAGS= -std=c++11
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -15,21 +15,21 @@ endif
 
 
 a.out: easy_logger.o main.o 
-	$(CC) -o a.out easy_logger.o main.o 
+	$(CC) $(CFLAGS) -o a.out easy_logger.o main.o 
 
 
 easy_logger.o: 
-	$(CC) -c easy_logger.cpp 
+	$(CC) $(CFLAGS) -c easy_logger.cpp 
 
 
 main.o:
-	$(CC) -c main.cpp
+	$(CC) $(CFLAGS) -c main.cpp
 
 
 .PHONY: clean install lib libmac liblinux example
 
 example:
-	$(CC) -o example.out easy_logger.cpp example.cpp
+	$(CC) $(CFLAGS) -o example.out easy_logger.cpp example.cpp
 	./example.out
 
 lib:
@@ -37,10 +37,10 @@ lib:
 	$(MAKE) $(LIBCMAKETARGET)
 
 libmac:
-	$(CC) ${CFLAGS}  -dynamiclib -flat_namespace  easy_logger.cpp -o libeasylogger.so.1.0
+	$(CC) $(CFLAGS)  -dynamiclib -flat_namespace  easy_logger.cpp -o libeasylogger.so.1.0
 
 liblinux:
-	$(CC) -fPIC -shared easy_logger.cpp -o libeasylogger.so.1.0
+	$(CC) $(CFLAGS) -fPIC -shared easy_logger.cpp -o libeasylogger.so.1.0
 
 install:
 	mkdir -p  /usr/local/include/easy_logger
